@@ -1,15 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Net.Json;
 
 namespace CallApi.Helpers
 {
-    public static class HelperCallApi
+    public class HelperCallApi
     {
-        public async static Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
+        public async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -25,6 +27,21 @@ namespace CallApi.Helpers
                 {
                     return default(T);
                 }
+            }
+        }
+
+        public async Task<T> CallApiPostPutAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(headers);
+                string stringT = typeof(T).ToString();
+                string json = JsonConvert.SerializeObject(stringT);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(request, content);
+                return await response.Content.ReadAsAsync<T>();
             }
         }
     }
