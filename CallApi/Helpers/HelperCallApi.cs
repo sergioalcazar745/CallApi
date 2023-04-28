@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CallApi.Helpers
 {
-    public class HelperCallApi
+    public static class HelperCallApi
     {
-        public async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
+        public static async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -29,7 +29,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, string token)
+        public static async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, string token)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -49,7 +49,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> InsertApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto)
+        public static async Task<T> InsertApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -72,7 +72,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> InsertApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto, string token)
+        public static async Task<T> InsertApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto, string token)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -95,7 +95,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> UpdateApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto)
+        public static async Task<T> UpdateApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -118,7 +118,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> UpdateApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto, string token)
+        public static async Task<T> UpdateApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto, string token)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -141,7 +141,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> DeleteApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
+        public static async Task<T> DeleteApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -160,7 +160,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> DeleteApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, string token)
+        public static async Task<T> DeleteApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, string token)
         {
             using (HttpClient client = new HttpClient())
             {
