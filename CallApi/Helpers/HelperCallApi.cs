@@ -38,7 +38,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> CallApiAsync<T>(string request)
+        public async Task<T> GetApiAsync<T>(string request)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -57,7 +57,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> CallApiAsync<T>(string request, object key)
+        public async Task<T> GetApiAsync<T>(string request, object key)
         {
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
@@ -80,7 +80,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> CallApiAsync<T>(string request, string token)
+        public async Task<T> GetApiAsync<T>(string request, string token)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -100,7 +100,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> CallApiAsync<T>(string request, object key, string token)
+        public async Task<T> GetApiAsync<T>(string request, object key, string token)
         {
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
@@ -124,7 +124,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> InsertApiAsync<T>(string request, object objeto)
+        public async Task<T> PostApiAsync<T>(string request, object objeto)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -147,7 +147,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> InsertApiAsync<T>(string request, object key, object objeto)
+        public async Task<T> PostApiAsync<T>(string request, object key, object objeto)
         {
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
@@ -174,7 +174,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> InsertApiAsync<T>(string request, string token, object objeto)
+        public async Task<T> PostApiAsync<T>(string request, string token, object objeto)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -197,7 +197,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> InsertApiAsync<T>(string request, object key, string token, object objeto)
+        public async Task<T> PosttApiAsync<T>(string request, object key, string token, object objeto)
         {
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
@@ -224,7 +224,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> UpdateApiAsync<T>(string request, object objeto)
+        public async Task<T> PutApiAsync<T>(string request, object objeto)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -247,7 +247,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> UpdateApiAsync<T>(string request, object key, object objeto)
+        public async Task<T> PutApiAsync<T>(string request, object key, object objeto)
         {
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
@@ -274,7 +274,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> UpdateApiAsync<T>(string request, string token, object objeto)
+        public async Task<T> PutApiAsync<T>(string request, string token, object objeto)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -297,7 +297,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> UpdateApiAsync<T>(string request, object key, string token, object objeto)
+        public async Task<T> PutApiAsync<T>(string request, object key, string token, object objeto)
         {
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
@@ -324,7 +324,7 @@ namespace CallApi.Helpers
             }
         }
 
-        public async Task<T> DeleteApiAsync<T>(string request)
+        public async Task<T> PutApiAsync<T>(string request)
         {
             using (HttpClient client = new HttpClient())
             {
