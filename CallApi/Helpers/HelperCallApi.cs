@@ -76,6 +76,7 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject json = JObject.Parse(data);
                         string dataJson = json.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -106,6 +107,38 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject json = JObject.Parse(data);
                         string dataJson = json.GetValue(_Key).ToString();
+                        this._Key = null;
+                        return JsonConvert.DeserializeObject<T>(dataJson);
+                    }
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> PostApiAsync<T>(string request)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(_Header);
+                StringContent content = new StringContent("", Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(request, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    if (_Key == null)
+                    {
+                        return await response.Content.ReadAsAsync<T>();
+                    }
+                    else
+                    {
+                        string data = await response.Content.ReadAsStringAsync();
+                        JObject jsonData = JObject.Parse(data);
+                        string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -137,6 +170,7 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject jsonData = JObject.Parse(data);
                         string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -169,6 +203,38 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject jsonData = JObject.Parse(data);
                         string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
+                        return JsonConvert.DeserializeObject<T>(dataJson);
+                    }
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> PutApiAsync<T>(string request)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(_Header);
+                StringContent content = new StringContent("", Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PutAsync(request, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    if (_Key == null)
+                    {
+                        return await response.Content.ReadAsAsync<T>();
+                    }
+                    else
+                    {
+                        string data = await response.Content.ReadAsStringAsync();
+                        JObject jsonData = JObject.Parse(data);
+                        string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -200,6 +266,7 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject jsonData = JObject.Parse(data);
                         string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -232,6 +299,7 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject jsonData = JObject.Parse(data);
                         string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -260,6 +328,7 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject jsonData = JObject.Parse(data);
                         string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
@@ -289,6 +358,7 @@ namespace CallApi.Helpers
                         string data = await response.Content.ReadAsStringAsync();
                         JObject jsonData = JObject.Parse(data);
                         string dataJson = jsonData.GetValue(_Key).ToString();
+                        this._Key = null;
                         return JsonConvert.DeserializeObject<T>(dataJson);
                     }
                 }
