@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,24 @@ using System.Threading.Tasks;
 
 namespace CallApi.Helpers
 {
-    public static class HelperCallApi
+    public class HelperCallApi
     {
-        public static async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
+        private string Uri;
+        private MediaTypeWithQualityHeaderValue Headers;
+
+        public HelperCallApi(string uri, MediaTypeWithQualityHeaderValue Headers)
+        {
+            this.Uri = uri;
+            this.Headers = Headers;
+        }
+
+        public async Task<T> CallApiAsync<T>(string request)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(headers);
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
@@ -29,13 +39,36 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> CallApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, string token)
+        public async Task<T> CallApiAsync<T>(string request, object key)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                HttpResponseMessage response = await client.GetAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(data);
+                    string dataJson = json.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> CallApiAsync<T>(string request, string token)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(headers);
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -49,13 +82,37 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> InsertApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto)
+        public async Task<T> CallApiAsync<T>(string request, object key, string token)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                HttpResponseMessage response = await client.GetAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(data);
+                    string dataJson = json.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> InsertApiAsync<T>(string request, T objeto)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(headers);
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
 
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -72,13 +129,40 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> InsertApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto, string token)
+        public async Task<T> InsertApiAsync<T>(string request, object key, T objeto)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+
+                string json = JsonConvert.SerializeObject(objeto);
+
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(request, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject jsonData = JObject.Parse(data);
+                    string dataJson = jsonData.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> InsertApiAsync<T>(string request, string token, T objeto)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(headers);
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -95,13 +179,40 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> UpdateApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto)
+        public async Task<T> InsertApiAsync<T>(string request, object key, string token, T objeto)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                string json = JsonConvert.SerializeObject(objeto);
+
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(request, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject jsonData = JObject.Parse(data);
+                    string dataJson = jsonData.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> UpdateApiAsync<T>(string request, T objeto)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(headers);
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
 
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -118,13 +229,40 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> UpdateApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, T objeto, string token)
+        public async Task<T> UpdateApiAsync<T>(string request, object key, T objeto)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+
+                string json = JsonConvert.SerializeObject(objeto);
+
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PutAsync(request, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject jsonData = JObject.Parse(data);
+                    string dataJson = jsonData.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> UpdateApiAsync<T>(string request, string token, T objeto)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(headers);
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -141,11 +279,38 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> DeleteApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers)
+        public async Task<T> UpdateApiAsync<T>(string request, object key, string token, T objeto)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                string json = JsonConvert.SerializeObject(objeto);
+
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PutAsync(request, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject jsonData = JObject.Parse(data);
+                    string dataJson = jsonData.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> DeleteApiAsync<T>(string request)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
 
                 HttpResponseMessage response = await client.DeleteAsync(request);
@@ -160,11 +325,34 @@ namespace CallApi.Helpers
             }
         }
 
-        public static async Task<T> DeleteApiAsync<T>(string uri, string request, MediaTypeWithQualityHeaderValue headers, string token)
+        public async Task<T> DeleteApiAsync<T>(string request, object key)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+
+                HttpResponseMessage response = await client.DeleteAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject jsonData = JObject.Parse(data);
+                    string dataJson = jsonData.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> DeleteApiAsync<T>(string request, string token)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(uri);
+                client.BaseAddress = new Uri(this.Uri);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
 
@@ -172,6 +360,30 @@ namespace CallApi.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadAsAsync<T>();
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+        public async Task<T> DeleteApiAsync<T>(string request, object key, string token)
+        {
+            string keyString = key.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.Uri);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+
+                HttpResponseMessage response = await client.DeleteAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    JObject jsonData = JObject.Parse(data);
+                    string dataJson = jsonData.GetValue(keyString).ToString();
+                    return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
                 {
