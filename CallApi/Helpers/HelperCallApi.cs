@@ -11,22 +11,40 @@ namespace CallApi.Helpers
 {
     public class HelperCallApi
     {
-        private string Uri;
-        private MediaTypeWithQualityHeaderValue Headers;
+        private string _Uri;
+        private MediaTypeWithQualityHeaderValue _Header;
 
-        public HelperCallApi(string uri, MediaTypeWithQualityHeaderValue Headers)
-        {
-            this.Uri = uri;
-            this.Headers = Headers;
+        public string Uri { 
+            get
+            {
+                return _Uri;
+            } 
+
+            set
+            {
+                this._Uri = value;
+            }
+        }
+
+        public MediaTypeWithQualityHeaderValue Header {
+            get
+            {
+                return _Header;
+            } 
+
+            set
+            {
+                this._Header = value;
+            }
         }
 
         public async Task<T> CallApiAsync<T>(string request)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(this._Header);
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
@@ -44,9 +62,9 @@ namespace CallApi.Helpers
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
@@ -66,9 +84,9 @@ namespace CallApi.Helpers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -87,9 +105,9 @@ namespace CallApi.Helpers
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -110,9 +128,9 @@ namespace CallApi.Helpers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
 
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -134,9 +152,9 @@ namespace CallApi.Helpers
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
 
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -160,9 +178,9 @@ namespace CallApi.Helpers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -184,9 +202,9 @@ namespace CallApi.Helpers
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -210,9 +228,9 @@ namespace CallApi.Helpers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
 
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -234,9 +252,9 @@ namespace CallApi.Helpers
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
 
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -260,9 +278,9 @@ namespace CallApi.Helpers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -284,9 +302,9 @@ namespace CallApi.Helpers
             string keyString = key.ToString();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Headers);
+                client.DefaultRequestHeaders.Accept.Add(_Header);
                 client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 string json = JsonConvert.SerializeObject(objeto);
 
@@ -310,7 +328,7 @@ namespace CallApi.Helpers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(this.Uri);
+                client.BaseAddress = new Uri(_Uri);
                 client.DefaultRequestHeaders.Clear();
 
                 HttpResponseMessage response = await client.DeleteAsync(request);
