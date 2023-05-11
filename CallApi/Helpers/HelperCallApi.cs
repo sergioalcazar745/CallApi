@@ -86,6 +86,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject json = JObject.Parse(data);
                     string dataJson = json.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -109,6 +113,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject json = JObject.Parse(data);
                     string dataJson = json.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -175,6 +183,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -199,6 +211,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -266,6 +282,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -291,6 +311,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -415,6 +439,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -439,6 +467,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -506,6 +538,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -531,6 +567,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -649,6 +689,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
@@ -671,6 +715,10 @@ namespace CallApi.Helpers
                     string data = await response.Content.ReadAsStringAsync();
                     JObject jsonData = JObject.Parse(data);
                     string dataJson = jsonData.GetValue(key).ToString();
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(dataJson, typeof(T));
+                    }
                     return JsonConvert.DeserializeObject<T>(dataJson);
                 }
                 else
